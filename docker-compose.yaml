@@ -1,0 +1,17 @@
+services:
+  nignx:
+    build:
+      dockerfile: Dockerfile.nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+  app:
+    build:
+      dockerfile: Dockerfile.app
+    volumes:
+      - ./backend:/app
+    environment:
+      - SERVER_PORT=8000
